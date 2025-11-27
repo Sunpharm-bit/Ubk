@@ -278,113 +278,6 @@
             background: #2980b9;
         }
         
-        /* 在线翻译样式 */
-        .online-translation {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-        
-        .translation-box {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .translation-row {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        
-        .translation-input, .translation-output {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .translation-textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            resize: vertical;
-            outline: none;
-            transition: border-color 0.3s;
-            -webkit-appearance: none;
-        }
-        
-        .translation-textarea:focus {
-            border-color: #3498db;
-        }
-        
-        .translation-label {
-            margin-bottom: 6px;
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 14px;
-        }
-        
-        .language-selector {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .language-select {
-            padding: 8px 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: white;
-            font-size: 14px;
-            outline: none;
-            flex: 1;
-            min-width: 120px;
-        }
-        
-        .translate-btn {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.3s;
-            align-self: flex-start;
-            width: 100%;
-            margin-top: 10px;
-        }
-        
-        .translate-btn:hover, .translate-btn:active {
-            background: #c0392b;
-        }
-        
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 12px;
-            color: #3498db;
-            font-size: 14px;
-        }
-        
-        .loading.active {
-            display: block;
-        }
-        
-        .error-message {
-            color: #e74c3c;
-            margin-top: 8px;
-            text-align: center;
-            font-size: 14px;
-        }
-        
         /* 分类标签样式 */
         .category-tabs {
             display: flex;
@@ -448,31 +341,22 @@
                 font-size: 16px;
             }
             
-            .search-input, .translation-textarea {
+            .search-input {
                 font-size: 16px; /* 防止iOS缩放 */
             }
             
             .history-list {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-            .language-selector {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .language-select {
-                width: 100%;
-            }
         }
         
         /* 防止iOS输入框样式问题 */
-        input, textarea, select {
+        input {
             -webkit-appearance: none;
             border-radius: 0;
         }
         
-        input[type="text"], textarea {
+        input[type="text"] {
             border-radius: 8px;
         }
         
@@ -531,54 +415,6 @@
                 <div class="history-list" id="historyList">
                     <!-- 常用词汇将动态填充 -->
                 </div>
-            </div>
-            
-            <h2 class="section-title">在线翻译</h2>
-            
-            <div class="online-translation">
-                <div class="language-selector">
-                    <span class="translation-label">翻译方向:</span>
-                    <select class="language-select" id="fromLang">
-                        <option value="zh-CHS">中文</option>
-                        <option value="en">英语</option>
-                        <option value="ja">日语</option>
-                        <option value="ko">韩语</option>
-                        <option value="fr">法语</option>
-                        <option value="de">德语</option>
-                    </select>
-                    <span>→</span>
-                    <select class="language-select" id="toLang">
-                        <option value="en">英语</option>
-                        <option value="zh-CHS">中文</option>
-                        <option value="ja">日语</option>
-                        <option value="ko">韩语</option>
-                        <option value="fr">法语</option>
-                        <option value="de">德语</option>
-                    </select>
-                </div>
-                
-                <div class="translation-box">
-                    <div class="translation-row">
-                        <div class="translation-input">
-                            <label class="translation-label" for="inputText">输入文本</label>
-                            <textarea class="translation-textarea" id="inputText" placeholder="请输入要翻译的文本..."></textarea>
-                        </div>
-                        <div class="translation-output">
-                            <label class="translation-label" for="outputText">翻译结果</label>
-                            <textarea class="translation-textarea" id="outputText" placeholder="翻译结果将显示在这里..." readonly></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="translation-row">
-                        <button class="translate-btn" id="translateBtn">翻译</button>
-                    </div>
-                </div>
-                
-                <div class="loading" id="loadingIndicator">
-                    翻译中，请稍候...
-                </div>
-                
-                <div class="error-message" id="errorMessage"></div>
             </div>
             
             <div style="text-align: center; margin-top: 20px;">
@@ -845,14 +681,6 @@
                     performSearch();
                 }
             });
-            
-            // 在线翻译功能
-            document.getElementById('translateBtn').addEventListener('click', translateText);
-            
-            // 防止表单提交导致页面刷新
-            document.querySelector('form')?.addEventListener('submit', function(e) {
-                e.preventDefault();
-            });
         });
 
         // 初始化分类标签
@@ -904,9 +732,9 @@
                 words = labVocabulary[category] || [];
             }
             
-            // 随机选择10个词汇显示
+            // 随机选择20个词汇显示
             const shuffled = words.sort(() => 0.5 - Math.random());
-            const selectedWords = shuffled.slice(0, 10);
+            const selectedWords = shuffled.slice(0, 20);
             
             selectedWords.forEach(word => {
                 const item = document.createElement('div');
@@ -1001,40 +829,6 @@
                 resultElement.innerHTML = '<div class="no-result">未找到相关词汇</div>';
                 resultElement.classList.add('active');
             }
-        }
-
-        // 翻译文本函数
-        function translateText() {
-            const inputText = document.getElementById('inputText').value.trim();
-            const fromLang = document.getElementById('fromLang').value;
-            const toLang = document.getElementById('toLang').value;
-            const outputText = document.getElementById('outputText');
-            const loadingIndicator = document.getElementById('loadingIndicator');
-            const errorMessage = document.getElementById('errorMessage');
-            
-            if (!inputText) {
-                errorMessage.textContent = '请输入要翻译的文本';
-                return;
-            }
-            
-            // 显示加载指示器
-            loadingIndicator.classList.add('active');
-            errorMessage.textContent = '';
-            outputText.value = '';
-            
-            // 使用简单的模拟翻译，避免跨域问题
-            setTimeout(() => {
-                if (fromLang === 'zh-CHS' && toLang === 'en') {
-                    // 模拟中文到英文翻译
-                    outputText.value = "Translation: " + inputText;
-                } else if (fromLang === 'en' && toLang === 'zh-CHS') {
-                    // 模拟英文到中文翻译
-                    outputText.value = "翻译结果: " + inputText;
-                } else {
-                    outputText.value = "Translation: " + inputText;
-                }
-                loadingIndicator.classList.remove('active');
-            }, 1000);
         }
     </script>
 </body>
