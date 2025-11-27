@@ -338,8 +338,12 @@
                 // 显示结果
                 displayResults(lod1, lod2);
             });
-            
-            // 清除按钮点击事件
+              
+            // 初始显示
+            resultsDiv.innerHTML = '<p>请输入数据并点击"计算干燥失重"按钮</p>';
+        });
+           
+        // 清除按钮点击事件
             clearBtn.addEventListener('click', function() {
                 if (confirm("确定要清除所有数据吗？")) {
                     // 清空所有输入框
@@ -351,10 +355,6 @@
                     resultsDiv.innerHTML = '<p>请输入数据并点击"计算干燥失重"按钮</p>';
                 }
             });
-            
-            // 初始显示
-            resultsDiv.innerHTML = '<p>请输入数据并点击"计算干燥失重"按钮</p>';
-        });
     </script>
 </body>
 </html>
