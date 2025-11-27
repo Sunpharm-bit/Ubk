@@ -405,30 +405,73 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // 模拟数据 - 在实际应用中应从JSON文件加载
-        const deviceData = [
-            { id: "DEV001", name: "高效液相色谱仪", expir: "2023.12.31", where: "实验室A" },
-            { id: "DEV002", name: "紫外分光光度计", expir: "2023.11.15", where: "实验室B" },
-            { id: "DEV003", name: "分析天平", expir: "2024.03.20", where: "实验室A" },
-            { id: "DEV004", name: "pH计", expir: "2023.10.05", where: "实验室C" },
-            { id: "DEV005", name: "离心机", expir: "2024.01.30", where: "实验室B" }
-        ];
+         // 可用于查询的数据
+        const databases = [
+            {
+                "name": "device",
+                "path": "../statics/info/device.json"
+            },
+            {
+                "name": "standard",
+                "path": "../statics/info/standard.json"
+            }
+        ]
 
-        const standardData = [
-            { batch: "STD2023001", name: "阿莫西林", source: "中国药品生物制品检定所", expir: "2024.05.10", kind: "化学对照品" },
-            { batch: "STD2023002", name: "头孢曲松", source: "USP", expir: "2023.11.30", kind: "化学对照品" },
-            { batch: "STD2023003", name: "胰岛素", source: "EP", expir: "2023.10.20", kind: "生物制品对照品" },
-            { batch: "STD2023004", name: "维生素C", source: "中国药品生物制品检定所", expir: "2024.08.15", kind: "化学对照品" },
-            { batch: "STD2023005", name: "布洛芬", source: "USP", expir: "2023.12.25", kind: "化学对照品" }
-        ];
+        let info = {}
+        $(() => {
+            let count = databases.length
+            let interval = setInterval(() => {
+                if (count == 0) {
+                    $("#content").append("已加载所有数据")
+                    clearInterval(interval)
+                }
+            }, 100)
 
-        let info = {
-            device: deviceData,
-            standard: standardData
-        };
+            // 加载所有数据
+            for (const database of databases) {
+                $.getJSON(database.path, (data) => {
+                    info[database.name] = data
+                    count = --count
+                    switch (database.name) {
+                        case "device":
+                            $("#content").append(`已加载设备数据，共 ${data.length} 条<br>`)
+                            break
+                        case "standard":
+                            $("#content").append(`已加载对照品数据，共 ${data.length} 条<br>`)
+                            break
+                        default:
+                            break
+                    }
+                })
+            }
 
-        let warningCount = 0;
-        let expiredCount = 0;
+            $("#search").click(() => {
+                let keyword = $("#keyword").val().toLowerCase()
+                $("#content").empty()
+                searchDevice(keyword)
+                searchStandard(keyword)
+            })
+        })
+
+        function searchDevice(keyword) {
+            let device = info.device.filter((value) => {
+                return value.id.toLowerCase().includes(keyword)
+            })
+            if (device.length > 0) {
+                let table_device = createDeviceTable(device)
+                $("#content").append(table_device)
+            }
+        }
+
+        function searchStandard(keyword) {
+            let standard = info.standard.filter((value) => {
+                return value.batch.toLowerCase().includes(keyword)
+            })
+            if (standard.length > 0) {
+                let table_standard = createStandardTable(standard)
+                $("#content").append(table_standard)
+            }
+        }
 
         $(() => {
             // 初始化统计数据
