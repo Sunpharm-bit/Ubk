@@ -1,122 +1,237 @@
 {
-  "quality": {
-    "phonetic": "ˈkwɒləti",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "质量；品质；特性",
-        "example": "We need to improve the quality of our products. 我们需要提高产品质量。"
-      }
-    ]
-  },
-  "analysis": {
-    "phonetic": "əˈnæləsɪs",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "分析；解析",
-        "example": "The lab is conducting chemical analysis. 实验室正在进行化学分析。"
-      }
-    ]
-  },
-  "laboratory": {
-    "phonetic": "ləˈbɒrətri",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "实验室；化验室",
-        "example": "All samples are tested in the laboratory. 所有样品都在实验室进行测试。"
-      }
-    ]
-  },
-  "instrument": {
-    "phonetic": "ˈɪnstrəmənt",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "仪器；工具",
-        "example": "This instrument is used for precise measurement. 这个仪器用于精确测量。"
-      }
-    ]
-  },
-  "calibration": {
-    "phonetic": "ˌkælɪˈbreɪʃn",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "校准；标定",
-        "example": "Regular calibration ensures accurate results. 定期校准确保结果准确。"
-      }
-    ]
-  },
-  "sample": {
-    "phonetic": "ˈsɑːmpl",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "样品；样本",
-        "example": "Please submit the sample for testing. 请提交样品进行测试。"
-      }
-    ]
-  },
-  "standard": {
-    "phonetic": "ˈstændəd",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "标准；规格",
-        "example": "This product meets international standards. 这个产品符合国际标准。"
-      }
-    ]
-  },
-  "specification": {
-    "phonetic": "ˌspesɪfɪˈkeɪʃn",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "规格；说明书",
-        "example": "Please refer to the technical specification. 请参考技术规格书。"
-      }
-    ]
-  },
-  "procedure": {
-    "phonetic": "prəˈsiːdʒə(r)",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "程序；步骤",
-        "example": "Follow the standard operating procedure. 遵循标准操作程序。"
-      }
-    ]
-  },
-  "validation": {
-    "phonetic": "ˌvælɪˈdeɪʃn",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "验证；确认",
-        "example": "Method validation is required before use. 使用前需要进行方法验证。"
-      }
-    ]
-  },
-  "accuracy": {
-    "phonetic": "ˈækjərəsi",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "准确性；精确度",
-        "example": "The instrument has high accuracy. 这个仪器具有高精度。"
-      }
-    ]
-  },
-  "precision": {
-    "phonetic": "prɪˈsɪʒn",
-    "definitions": [
-      {
-        "pos": "n.",
-        "meaning": "精密度；精确性",
-        "example": "Precision is critical in analytical work. 在分析工作中精密度至关重要。"
-      }
-    ]
-  }
+  "仪器管理": [
+    { "chinese": "新建项目文件", "english": "New project" },
+    { "chinese": "新建主方法文件", "english": "New method" },
+    { "chinese": "保存主方法文件", "english": "Save method" },
+    { "chinese": "新建积分方法", "english": "New integration method" },
+    { "chinese": "保存积分方法", "english": "Save integration method" },
+    { "chinese": "新建批处理文件", "english": "New sequence" },
+    { "chinese": "保存批处理文件", "english": "Save sequence" },
+    { "chinese": "更正批处理信息", "english": "Modify sequence" },
+    { "chinese": "批处理中添加行", "english": "Add rows in sequence" },
+    { "chinese": "批处理中删除行", "english": "Delete rows in sequence" },
+    { "chinese": "更改仪器配置", "english": "Modify instrument configuration" },
+    { "chinese": "更换色谱柱", "english": "Change chromatographic column" },
+    { "chinese": "更正分析方法", "english": "Modify method" },
+    { "chinese": "修改积分参数", "english": "Modify integration parameter" },
+    { "chinese": "更正样品文件名", "english": "Change sample filename" },
+    { "chinese": "更正数据文件名", "english": "Change data file name" },
+    { "chinese": "备份数据", "english": "Backup data" },
+    { "chinese": "还原数据", "english": "Restore data" },
+    { "chinese": "更改色谱柱流量", "english": "Modify flow rate" },
+    { "chinese": "色谱", "english": "Chromatograph" },
+    { "chinese": "导入方法文件", "english": "Import method file" },
+    { "chinese": "导出方法文件", "english": "Export method file" },
+    { "chinese": "新建报告模板", "english": "Create report template" },
+    { "chinese": "保存报告模板", "english": "Save report template" },
+    { "chinese": "添加新用户", "english": "Create new user" },
+    { "chinese": "添加新仪器", "english": "Add new instrument" },
+    { "chinese": "添置权限", "english": "Add privilege" },
+    { "chinese": "修改账户及密码", "english": "Modify account and password" },
+    { "chinese": "解除锁定", "english": "Unlock" },
+    { "chinese": "接管/交接分析", "english": "Takeover / handover analysis" },
+    { "chinese": "暂停批处理", "english": "Pause batch processing" },
+    { "chinese": "停止批处理", "english": "Abort batch processing" },
+    { "chinese": "样品处理", "english": "Sample Handling" }
+  ],
+  "项目": [
+    { "chinese": "反应液", "english": "Reaction mixture" },
+    { "chinese": "离心湿品", "english": "Centrifugal wet product" },
+    { "chinese": "精制湿品", "english": "Wet purified product" },
+    { "chinese": "回收溶剂", "english": "Recycled solvent" },
+    { "chinese": "回收物料", "english": "Recycled materials" },
+    { "chinese": "中控", "english": "IPC" },
+    { "chinese": "中间体", "english": "IM (intermediate)" },
+    { "chinese": "成品", "english": "CP (final product)" },
+    { "chinese": "方法重现及研究", "english": "Analytical method reproduction and study" },
+    { "chinese": "标品标定", "english": "Standardization of standard" },
+    { "chinese": "方法验证", "english": "Validation of methods" },
+    { "chinese": "原料", "english": "Raw materials" },
+    { "chinese": "起始物料", "english": "Starting material" }
+  ],
+  "序列": [
+    { "chinese": "空白", "english": "Blank" },
+    { "chinese": "灵敏度溶液", "english": "Sensitivity solution" },
+    { "chinese": "系统适用性溶液", "english": "System suitability solution" },
+    { "chinese": "对照溶液", "english": "Contrast solution" },
+    { "chinese": "对照品溶液", "english": "Standard solution" },
+    { "chinese": "加速实验", "english": "Accelerated test" },
+    { "chinese": "长期实验", "english": "Long-term test" },
+    { "chinese": "积分方法", "english": "Integration method" },
+    { "chinese": "检测方法", "english": "Detection method" },
+    { "chinese": "测定", "english": "Residue" },
+    { "chinese": "有关物质", "english": "Related substances" },
+    { "chinese": "残留溶剂", "english": "Residual solvents" },
+    { "chinese": "异构体", "english": "Chiral purity" },
+    { "chinese": "供试品溶液", "english": "Test solution" },
+    { "chinese": "杂质储备液", "english": "Stock solution" },
+    { "chinese": "定位", "english": "Orientation" }
+  ],
+  "残留溶剂": [
+    { "chinese": "甲醇", "english": "Methyl alcohol (MT)" },
+    { "chinese": "乙醇", "english": "Ethanol (EtOH)" },
+    { "chinese": "甲苯", "english": "Toluene (TOL)" },
+    { "chinese": "乙酸乙酯", "english": "Ethyl acetate (EAC)" },
+    { "chinese": "正庚烷", "english": "n-Heptane" },
+    { "chinese": "三乙胺", "english": "Triethyl amine (TEA)" },
+    { "chinese": "乙酸异丙酯", "english": "Isopropyl acetate (IPAC)" },
+    { "chinese": "苯", "english": "Benzene (BZ)" },
+    { "chinese": "N-甲基吡咯烷酮", "english": "NMP" },
+    { "chinese": "硫酸二乙酯", "english": "Diethyl sulfate" },
+    { "chinese": "碘化钠", "english": "Sodium iodide (NaI)" },
+    { "chinese": "溴乙烷", "english": "Bromoethane (EtBr)" },
+    { "chinese": "异丙醇", "english": "Isopropanol (IPA)" },
+    { "chinese": "苯甲醛", "english": "Benzaldehyde" },
+    { "chinese": "正己烷", "english": "N-hexane" },
+    { "chinese": "吡啶", "english": "Pyridine (Pyr)" },
+    { "chinese": "二氯甲烷", "english": "Dichloromethane (DCM)" },
+    { "chinese": "甲酸", "english": "Formic acid" },
+    { "chinese": "丙酮", "english": "Acetone (AC)" },
+    { "chinese": "四氢扶喃", "english": "Tetrahydrofuran (THF)" },
+    { "chinese": "甘氨酸", "english": "glycine(Gly, G)" },
+    { "chinese": "冰乙酸", "english": "Acetic acid glacial" },
+    { "chinese": "氯化钙", "english": "Calcium chloride" },
+    { "chinese": "氯化钠", "english": "Sodium chloride" },
+    { "chinese": "十二烷基磺酸钠", "english": "Sodium dodecyl sulphate" },
+    { "chinese": "盐酸", "english": "hydrochloric acid (HCl)" },
+    { "chinese": "氢氧化钠", "english": "Sodium hydrate/hydroxide" },
+    { "chinese": "醋酸钾", "english": "Potassium acetate" },
+    { "chinese": "醋酸铵", "english": "Ammonium acetate" },
+    { "chinese": "氯仿", "english": "Chloroform" },
+    { "chinese": "高锰酸钾", "english": "Potassium hypermanganate" },
+    { "chinese": "次氯酸钠", "english": "Clorox" },
+    { "chinese": "苯酚", "english": "Phenol" },
+    { "chinese": "催化剂", "english": "Catalyst" }
+  ],
+  "名称": [
+    { "chinese": "缬沙坦", "english": "Valsartan" },
+    { "chinese": "沙库巴曲", "english": "Sacubitril" },
+    { "chinese": "浸泡液", "english": "Immersion" },
+    { "chinese": "擦拭样", "english": "Rubbing" },
+    { "chinese": "淋洗液", "english": "Leacheate" },
+    { "chinese": "上，中，下", "english": "On, In, Under" },
+    { "chinese": "附加性...个月", "english": "Addition...month" },
+    { "chinese": "预加速", "english": "Preacceleration" },
+    { "chinese": "氧化杂质", "english": "Oxiditing impurities" },
+    { "chinese": "氢化反应液", "english": "Hydrogenation reaction mixture" },
+    { "chinese": "保温反应液", "english": "Heat preservation reaction solution" },
+    { "chinese": "在烘湿品", "english": "Drying wet products" },
+    { "chinese": "原容量瓶", "english": "Original volumetric flask" },
+    { "chinese": "原进样瓶", "english": "Original injection bottle" },
+    { "chinese": "原顶空瓶", "english": "Original headspace bottle" },
+    { "chinese": "标准贮备液", "english": "Standard stock solution" },
+    { "chinese": "样品制备", "english": "Again sample preparation" },
+    { "chinese": "重新配制样品", "english": "Reformulate the sample" },
+    { "chinese": "均一性", "english": "Homogeneity" },
+    { "chinese": "浑浊的", "english": "Turbid" },
+    { "chinese": "混合干品", "english": "Dry mix" },
+    { "chinese": "摄氏度", "english": "Centigrade" },
+    { "chinese": "烘柱子", "english": "Drying column" },
+    { "chinese": "降温", "english": "Cooling down" },
+    { "chinese": "停泵", "english": "Stop pump" },
+    { "chinese": "关闭", "english": "Shutdown" },
+    { "chinese": "分解", "english": "Analysis" },
+    { "chinese": "氧化", "english": "to oxidize" }
+  ],
+  "积分": [
+    { "chinese": "最小峰面积", "english": "Area reject" },
+    { "chinese": "峰面积加和", "english": "Area sum" },
+    { "chinese": "峰面积加和片段", "english": "Area sum slice" },
+    { "chinese": "自动调节峰宽", "english": "Auto peak width" },
+    { "chinese": "峰谷处的基线", "english": "Baseline at valleys" },
+    { "chinese": "基线返回", "english": "Baseline backwards" },
+    { "chinese": "基线保持", "english": "Baseline hold" },
+    { "chinese": "基线连到下一峰谷", "english": "Baseline next valley" },
+    { "chinese": "基线连到此点", "english": "Baseline now" },
+    { "chinese": "检测肩峰", "english": "Detect shoulders" },
+    { "chinese": "固定峰宽", "english": "Fixed peak width" },
+    { "chinese": "最小峰高", "english": "Height reject" },
+    { "chinese": "积分", "english": "Integration" },
+    { "chinese": "最大峰面积", "english": "Maximum area" },
+    { "chinese": "最大峰高", "english": "Maximum height" },
+    { "chinese": "负峰", "english": "Negative peak" },
+    { "chinese": "设置范围内基线", "english": "Set baseline from range" },
+    { "chinese": "设置范围内低基线", "english": "Set low baseline from range" },
+    { "chinese": "肩峰模式", "english": "Shoulders mode" },
+    { "chinese": "斜率灵敏度", "english": "Slope sensitivity" },
+    { "chinese": "溶剂峰", "english": "Solvent peak" },
+    { "chinese": "溶剂峰斜率", "english": "Solvent peak slope" },
+    { "chinese": "分裂峰", "english": "Split peak" },
+    { "chinese": "拖尾切线撤去", "english": "Tall tangent skim" },
+    { "chinese": "切线撤去模式", "english": "Tangent skim mode" },
+    { "chinese": "未指定峰", "english": "Unassigned peaks" },
+    { "chinese": "使用范围内基线", "english": "Use baseline from range" }
+  ],
+  "设备类型": [
+    { "chinese": "原子吸收光谱仪", "english": "Atomic Absorption Spectroscopy (AAS)" },
+    { "chinese": "原子发射光谱仪", "english": "Atomic Emission Spectrometer (AES)" },
+    { "chinese": "原子荧光光谱仪", "english": "Atomic Fluorescence Spectroscopy (AFS)" },
+    { "chinese": "自动滴定仪", "english": "Automatic Titrator" },
+    { "chinese": "电导仪", "english": "Conductivity Meter" },
+    { "chinese": "傅里叶变换红外光谱仪", "english": "FT-IR Spectrometer (IR)" },
+    { "chinese": "气体分析", "english": "Gas Analysis" },
+    { "chinese": "气相色谱仪", "english": "Gas Chromatograph (GC)" },
+    { "chinese": "气相色谱-质谱联用仪", "english": "GC-MS" },
+    { "chinese": "高压/效液相色谱仪", "english": "High Pressure/Performance Liquid Chromatography (HPLC)" },
+    { "chinese": "分子杂交仪", "english": "Hybridization Oven" },
+    { "chinese": "ICP-质谱联用仪", "english": "ICP-MS" },
+    { "chinese": "电感偶合等离子体发射光谱仪", "english": "Inductive Coupled Plasma Emission Spectrometer (ICP-MS)" },
+    { "chinese": "液相色谱-质谱联用仪", "english": "LC-MS" },
+    { "chinese": "质谱仪", "english": "Mass Spectrometer (MS)" },
+    { "chinese": "核磁共振波谱仪", "english": "Nuclear Magnetic Resonance Spectrometer (NMRS)" },
+    { "chinese": "粒度分析仪", "english": "Particle Size Analyzer (PSD)" },
+    { "chinese": "传感器", "english": "Sensors" },
+    { "chinese": "紫外检测仪", "english": "Ultraviolet Detector" },
+    { "chinese": "紫外观察灯", "english": "Ultraviolet Lamp" },
+    { "chinese": "紫外-可见光分光光度计", "english": "UV-Visible Spectrophotometer (UV)" },
+    { "chinese": "X射线衍射仪", "english": "X-Ray Diffractomer (XRD)" },
+    { "chinese": "紫外灯", "english": "Ultraviolet illumination" },
+    { "chinese": "真空泵", "english": "Vacuum pump" },
+    { "chinese": "天平", "english": "Balance/scale" },
+    { "chinese": "分析天平", "english": "Analytical balance" },
+    { "chinese": "电子天平", "english": "Electronic balance" },
+    { "chinese": "培养箱", "english": "Incubator" },
+    { "chinese": "超低温冰箱", "english": "Ultra-low Temperature Freezer" },
+    { "chinese": "离心机转子", "english": "Rotor" },
+    { "chinese": "真空泵", "english": "Vacuum pump" },
+    { "chinese": "水浴锅", "english": "Water bath kettle" },
+    { "chinese": "pH 计", "english": "pH meter" },
+    { "chinese": "磁力搅拌器", "english": "Magnetic stirrer" },
+    { "chinese": "烘箱", "english": "Oven" },
+    { "chinese": "超净工作台", "english": "Superclean bench" },
+    { "chinese": "通风橱", "english": "Fume cupboard" },
+    { "chinese": "高压蒸汽灭菌器", "english": "Autoclave" }
+  ],
+  "实验器具": [
+    { "chinese": "量杯", "english": "Measuring cup" },
+    { "chinese": "烧杯", "english": "Beaker" },
+    { "chinese": "坩埚", "english": "Crucible" },
+    { "chinese": "锥形瓶", "english": "Conical flask" },
+    { "chinese": "洗瓶", "english": "Plastic wash bottle" },
+    { "chinese": "搅拌棒", "english": "Stirring rod" },
+    { "chinese": "容量瓶", "english": "Volumetric flask/measuring flask" },
+    { "chinese": "移液管", "english": "(one-mark) pipette" },
+    { "chinese": "吸液管", "english": "Pipette" },
+    { "chinese": "滤器", "english": "Filter" },
+    { "chinese": "滤纸", "english": "Filter paper" },
+    { "chinese": "培养皿", "english": "Culture dish" },
+    { "chinese": "移液枪", "english": "Pipette" },
+    { "chinese": "移液枪枪头", "english": "Pipette tips" },
+    { "chinese": "铝箔", "english": "Aluminium foil" },
+    { "chinese": "洗耳球", "english": "Rubber suction bulb" },
+    { "chinese": "研磨钵", "english": "Mortar" },
+    { "chinese": "研杵", "english": "Pestle" },
+    { "chinese": "药匙", "english": "Lab spoon" },
+    { "chinese": "转移容器", "english": "Decant" },
+    { "chinese": "吸出", "english": "Aspirate" },
+    { "chinese": "吹吸", "english": "Blowing and suction" },
+    { "chinese": "烘", "english": "Bake" },
+    { "chinese": "灭菌", "english": "Sterilize" },
+    { "chinese": "分装", "english": "Aliquot" },
+    { "chinese": "冷却", "english": "Chill down" },
+    { "chinese": "稀释", "english": "Dilute" },
+    { "chinese": "洗脱", "english": "Elute" },
+    { "chinese": "搅拌", "english": "Stir/agitate" },
+    { "chinese": "旋转", "english": "Swirl/spin" }
+  ]
 }
