@@ -120,7 +120,7 @@
         }
 
         function createStandardTable(data) {
-            return createTable(data, `对照品信息（${data.length}条）`, ["批号", "来源", "有效期至"], ["kind"])
+            return createTable(data, `对照品信息（${data.length}条）`, ["名称", "批号", "来源", "有效期至"], ["kind"])
         }
 
         function createTable(data, captionText, header, hidden = []) {
