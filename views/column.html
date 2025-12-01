@@ -26,6 +26,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -33,41 +34,44 @@
             line-height: 1.6;
             color: var(--dark-color);
             background-color: #f5f7fa;
-            padding: 20px;
+            padding: 15px;
             max-width: 1000px;
             margin: 0 auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
             border-bottom: 1px solid var(--border-color);
         }
 
         .header h1 {
             color: var(--primary-color);
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .header p {
             color: var(--secondary-color);
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .tabs {
             display: flex;
             justify-content: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--box-shadow);
-            max-width: 500px;
+            max-width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -75,7 +79,7 @@
         .tab {
             flex: 1;
             text-align: center;
-            padding: 15px 20px;
+            padding: 14px 15px;
             background-color: white;
             border: none;
             font-size: 1rem;
@@ -83,6 +87,10 @@
             cursor: pointer;
             transition: var(--transition);
             color: var(--secondary-color);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .tab:first-child {
@@ -103,8 +111,8 @@
 
         .selector-container {
             position: relative;
-            margin-bottom: 30px;
-            max-width: 500px;
+            margin-bottom: 25px;
+            width: 100%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -112,7 +120,7 @@
         select {
             width: 100%;
             height: 50px;
-            padding: 0 20px;
+            padding: 0 50px 0 15px;
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
             background-color: white;
@@ -123,7 +131,6 @@
             -moz-appearance: none;
             -webkit-appearance: none;
             appearance: none;
-            padding-right: 50px;
         }
 
         select:focus {
@@ -142,27 +149,29 @@
             transform: translateY(-50%);
             color: var(--secondary-color);
             pointer-events: none;
+            font-size: 0.9rem;
         }
 
         .card {
             background-color: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 30px;
-            min-height: 400px;
+            padding: 20px;
+            min-height: 350px;
             transition: var(--transition);
+            margin-bottom: 20px;
         }
 
         .tips {
             text-align: center;
             color: var(--secondary-color);
-            padding: 40px 20px;
+            padding: 30px 15px;
             line-height: 1.8;
         }
 
         .tips i {
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: var(--primary-color);
         }
 
@@ -171,18 +180,18 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 60px 20px;
+            padding: 40px 15px;
             color: var(--secondary-color);
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(44, 128, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(44, 128, 255, 0.2);
             border-radius: 50%;
             border-top-color: var(--primary-color);
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         @keyframes spin {
@@ -191,27 +200,43 @@
         }
 
         .column-details {
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .column-details h2 {
             color: var(--primary-dark);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
+            font-size: 1.4rem;
         }
 
         .detail-item {
             display: flex;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
+            flex-direction: column;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
             border-bottom: 1px solid #f0f0f0;
+        }
+
+        @media (min-width: 480px) {
+            .detail-item {
+                flex-direction: row;
+            }
         }
 
         .detail-label {
             font-weight: 600;
-            min-width: 100px;
+            min-width: 80px;
             color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        @media (min-width: 480px) {
+            .detail-label {
+                margin-bottom: 0;
+                min-width: 100px;
+            }
         }
 
         .detail-value {
@@ -220,21 +245,28 @@
 
         .column-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 600px) {
+            .column-list {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
         }
 
         .column-card {
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
-            padding: 20px;
+            padding: 15px;
             transition: var(--transition);
             cursor: pointer;
+            touch-action: manipulation;
         }
 
-        .column-card:hover {
+        .column-card:hover, .column-card:active {
             box-shadow: var(--box-shadow);
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         .column-card.hplc {
@@ -246,55 +278,119 @@
         }
 
         .column-card h3 {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--primary-dark);
+            font-size: 1.2rem;
         }
 
         .column-card p {
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             color: var(--secondary-color);
+            font-size: 0.95rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .back-btn:hover, .back-btn:active {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         .footer {
             text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
+            margin-top: 25px;
+            padding-top: 15px;
             border-top: 1px solid var(--border-color);
             color: var(--secondary-color);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .card {
-                padding: 20px;
-            }
-            
-            .column-list {
-                grid-template-columns: 1fr;
-            }
-        }
-
+        /* 移动端优化 */
         @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
             .header h1 {
                 font-size: 1.5rem;
+                gap: 8px;
+            }
+            
+            .header h1 i {
+                font-size: 1.3rem;
+            }
+            
+            .tab {
+                padding: 12px 10px;
+                font-size: 0.95rem;
+                min-height: 45px;
             }
             
             select {
                 height: 45px;
                 font-size: 0.95rem;
+                padding: 0 45px 0 12px;
+            }
+            
+            .selector-container::after {
+                right: 15px;
             }
             
             .card {
                 padding: 15px;
+                min-height: 300px;
             }
+            
+            .column-card {
+                padding: 12px;
+            }
+            
+            .column-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .column-card p {
+                font-size: 0.9rem;
+            }
+            
+            .back-btn {
+                padding: 8px 16px;
+                font-size: 0.95rem;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* 平板优化 */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .header h1 {
+                font-size: 1.7rem;
+            }
+            
+            .card {
+                padding: 18px;
+            }
+            
+            .column-list {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        /* 防止iOS Safari缩放 */
+        input, select, textarea {
+            font-size: 16px;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -324,181 +420,9 @@
     </div>
 
     <script>
-        // 色谱柱数据 - 基于您提供的表格
-        const columnsData = {
-            "hplc": [
-                {
-                    "id": "LC267,LC281,LC282,LC283,LC308,LC309,LC648,LC649",
-                    "model": "InertSustain C18",
-                    "specification": "150mmx4.6mmx5um",
-                    "description": "反相C18色谱柱，适用于大多数化合物的分离"
-                },
-                {
-                    "id": "LC574",
-                    "model": "InertSustain C18",
-                    "specification": "150mmx4.6mmx3um",
-                    "description": "反相C18色谱柱，3um粒径提供更高分离效率"
-                },
-                {
-                    "id": "LC268",
-                    "model": "Dael-chiral-pak-IG",
-                    "specification": "250mmx4.6mmx5um",
-                    "description": "手性分离色谱柱"
-                },
-                {
-                    "id": "LC274,LC307,LC448,LC642",
-                    "model": "CHIRALCEL OJ-RH",
-                    "specification": "150mmx4.6mmx5um",
-                    "description": "手性分离色谱柱，适用于对映体分离"
-                },
-                {
-                    "id": "LC442,LC612,LC635,LC539",
-                    "model": "ZORBAX Eclipse plus C18",
-                    "specification": "100mmx4.6mmx3.5um",
-                    "description": "安捷伦C18色谱柱，高柱效"
-                },
-                {
-                    "id": "LC299,LC361",
-                    "model": "CHIRALCEL OX-H",
-                    "specification": "4.6x250mmx5um",
-                    "description": "手性分离色谱柱"
-                },
-                {
-                    "id": "LC323,LC324,LC390,LC403",
-                    "model": "XBridge®shield RP18",
-                    "specification": "150mmx4.6mmx3.5um",
-                    "description": "Waters屏蔽C18色谱柱，适合碱性化合物分离"
-                },
-                {
-                    "id": "LC326,LC327",
-                    "model": "ACE UltraCore SuperC18",
-                    "specification": "150x4.6mmx2.5um",
-                    "description": "超核技术C18柱，2.5um小粒径"
-                },
-                {
-                    "id": "LC329,LC330,LC437",
-                    "model": "Atlantis T3",
-                    "specification": "150mmx4.6x3um",
-                    "description": "Waters T3色谱柱，适合极性化合物保留"
-                },
-                {
-                    "id": "LC331,LC333",
-                    "model": "Thermo Hypersil GOLD",
-                    "specification": "250x4.6mmx5um",
-                    "description": "赛默飞C18色谱柱"
-                },
-                {
-                    "id": "LC344,LC350,LC351,LC397",
-                    "model": "捕集小柱Ghost-Buster",
-                    "specification": "4.6*50mm",
-                    "description": "捕集柱，用于样品前处理"
-                },
-                {
-                    "id": "LC362,LC363",
-                    "model": "Infinitylab poroshell 120 phenyl Hexyl",
-                    "specification": "3.0*150mm*2.7",
-                    "description": "安捷伦核壳技术苯基己基柱"
-                },
-                {
-                    "id": "LC365,LC373,LC384",
-                    "model": "Gemini®C18",
-                    "specification": "250*4.6mm*5um",
-                    "description": "菲罗门Gemini C18色谱柱"
-                },
-                {
-                    "id": "LC368,LC446",
-                    "model": "AD-H",
-                    "specification": "250mmx4.6mmx5um",
-                    "description": "手性分离色谱柱"
-                },
-                {
-                    "id": "LC377,LC378",
-                    "model": "ZORBAX Eclipse XDB-C18",
-                    "specification": "4.6*150mm*5um",
-                    "description": "安捷伦XDB-C18色谱柱"
-                },
-                {
-                    "id": "LC382,LC401",
-                    "model": "Excel C18-HL",
-                    "specification": "250*4.6*5um",
-                    "description": "C18色谱柱"
-                },
-                {
-                    "id": "LC294",
-                    "model": "Syncronis C18",
-                    "specification": "250mmx4.6mmx5um",
-                    "description": "赛默飞Syncronis C18色谱柱"
-                },
-                {
-                    "id": "LC383,LC291",
-                    "model": "InfinityLab Poroshell 120EC-C18",
-                    "specification": "100*4.6mm*2.7um",
-                    "description": "安捷伦核壳技术C18柱"
-                },
-                {
-                    "id": "LC478,LC659",
-                    "model": "依利特Supersil SCX",
-                    "specification": "4*250 mm, 5 µm",
-                    "description": "强阳离子交换色谱柱"
-                }
-            ],
-            "gc": [
-                {
-                    "id": "GC066,GC124,GC134",
-                    "model": "DB-624",
-                    "specification": "30mx0.53mmx3.0um",
-                    "description": "安捷伦624色谱柱，适用于挥发性有机物分析"
-                },
-                {
-                    "id": "GC075",
-                    "model": "DB-624",
-                    "specification": "30mx0.320mmx1.80um",
-                    "description": "安捷伦624色谱柱，0.32mm内径"
-                },
-                {
-                    "id": "GC073,GC074",
-                    "model": "DB-35",
-                    "specification": "30mx0.32mmx0.5um",
-                    "description": "安捷伦35色谱柱，中等极性"
-                },
-                {
-                    "id": "GC087,GC091",
-                    "model": "DB-1701",
-                    "specification": "30*0.250*1.00um",
-                    "description": "安捷伦1701色谱柱，中等极性，适合农药分析"
-                },
-                {
-                    "id": "GC088,GC092",
-                    "model": "DB-WAXETR",
-                    "specification": "30*0.320*1.00um",
-                    "description": "安捷伦WAXETR色谱柱，极性柱"
-                },
-                {
-                    "id": "GC090",
-                    "model": "RIX-1301",
-                    "specification": "30*0.32*1.8um",
-                    "description": "Restek 1301色谱柱"
-                },
-                {
-                    "id": "GC112",
-                    "model": "InertCap5",
-                    "specification": "0.53*30*5.00um",
-                    "description": "岛津InertCap5色谱柱，0.53mm大口径"
-                },
-                {
-                    "id": "GC120",
-                    "model": "DB-624",
-                    "specification": "60mx0.320mmx1.80um",
-                    "description": "安捷伦624色谱柱，60米长柱"
-                },
-                {
-                    "id": "GC122",
-                    "model": "ZB-624",
-                    "specification": "30m*0.25mm*1.4um",
-                    "description": "Phenomenex ZB-624色谱柱"
-                }
-            ]
-        };
+        // 全局变量存储色谱柱数据
+        let columnsData = {};
+        let currentType = "hplc";
 
         const tips = `
             <div class="tips">
@@ -509,8 +433,47 @@
             </div>
         `;
 
-        $(() => {
-            let currentType = "hplc";
+        // 加载色谱柱数据
+        function loadColumnData() {
+            $("#content").html(`
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>正在加载色谱柱数据...</p>
+                </div>
+            `);
+
+            // 使用相对路径访问JSON文件
+            $.ajax({
+                url: "../statics/info/column.json",
+                dataType: "json",
+                success: function(data) {
+                    columnsData = data;
+                    initApp();
+                },
+                error: function(xhr, status, error) {
+                    console.error("加载JSON数据失败:", error);
+                    
+                    $("#content").html(`
+                        <div class="tips">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>数据加载失败</h3>
+                            <p>无法加载色谱柱数据，请检查以下问题：</p>
+                            <p>1. 确保 statics/info/column.json 文件存在</p>
+                            <p>2. 检查JSON文件格式是否正确</p>
+                            <p>3. 确认网络连接正常</p>
+                            <button id="retry-btn" class="back-btn" style="margin-top: 15px;">重新加载</button>
+                        </div>
+                    `);
+                    
+                    $("#retry-btn").on("click", function() {
+                        loadColumnData();
+                    });
+                }
+            });
+        }
+
+        // 初始化应用
+        function initApp() {
             $("#content").html(tips);
 
             // 选项卡切换
@@ -527,13 +490,26 @@
                 $("#selector").empty();
                 $("#selector").append(`<option value='null' selected>请选择色谱柱型号</option>`);
                 
-                columnsData[currentType].forEach(column => {
-                    $("#selector").append(`<option value='${column.id}'>${column.model} - ${column.specification}</option>`);
-                });
+                if (columnsData[currentType]) {
+                    columnsData[currentType].forEach(column => {
+                        $("#selector").append(`<option value='${column.id}'>${column.model} - ${column.specification}</option>`);
+                    });
+                }
             }
 
             // 显示所有色谱柱
             function showAllColumns() {
+                if (!columnsData[currentType] || columnsData[currentType].length === 0) {
+                    $("#content").html(`
+                        <div class="tips">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>暂无数据</h3>
+                            <p>当前类别暂无色谱柱数据。</p>
+                        </div>
+                    `);
+                    return;
+                }
+                
                 const columns = columnsData[currentType];
                 let html = `<h2>${currentType === "hplc" ? "液相色谱柱" : "气相色谱柱"}列表</h2>`;
                 html += `<div class="column-list">`;
@@ -552,8 +528,8 @@
                 html += `</div>`;
                 $("#content").html(html);
                 
-                // 添加点击事件
-                $(".column-card").on("click", function() {
+                // 添加点击事件 - 使用事件委托避免重复绑定
+                $("#content").off("click", ".column-card").on("click", ".column-card", function() {
                     const id = $(this).data("id");
                     showColumnDetails(id);
                 });
@@ -583,10 +559,16 @@
                             <div class="detail-label">描述</div>
                             <div class="detail-value">${column.description}</div>
                         </div>
+                        <button id="back-btn" class="back-btn">返回列表</button>
+                    </div>
                 `;
                 
-                html += `</div>`;
                 $("#content").html(html);
+                
+                // 返回按钮事件
+                $("#back-btn").on("click", function() {
+                    showAllColumns();
+                });
             }
 
             // 下拉选择器变化事件
@@ -604,6 +586,11 @@
             // 初始化
             updateSelector();
             showAllColumns();
+        }
+
+        // 页面加载完成后开始加载数据
+        $(() => {
+            loadColumnData();
         });
     </script>
 </body>
