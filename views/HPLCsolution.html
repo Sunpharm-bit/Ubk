@@ -571,12 +571,7 @@
                 <h2 class="section-title">常用梯度预设</h2>
                 <div class="note">选择预设梯度将自动填充下方表格（适用于2相系统）</div>
                 <div class="preset-buttons">
-                    <button class="preset-btn" data-preset="quick">快速梯度<br>0-5-10 min</button>
-                    <button class="preset-btn" data-preset="linear">线性梯度<br>0-20-25-30 min</button>
-                    <button class="preset-btn" data-preset="isocratic">等度洗脱<br>0-20 min</button>
-                    <button class="preset-btn" data-preset="long">长梯度<br>0-30-35-40 min</button>
-                    <button class="preset-btn" data-preset="shallow">浅梯度<br>0-30-35 min</button>
-                    <button class="preset-btn" data-preset="step">阶梯梯度<br>0-5-10-15 min</button>
+                    <button class="preset-btn" data-preset="quick">常用梯度<br>0-25-40-45-45.1-50 min</button>
                 </div>
             </div>
             
@@ -673,53 +668,14 @@
         // 预设梯度数据
         const presetGradients = {
             quick: {
-                name: "快速梯度",
+                name: "常用梯度",
                 steps: [
-                    {time: 0, A: 95, B: 5},
-                    {time: 5, A: 5, B: 95},
-                    {time: 10, A: 95, B: 5}
-                ]
-            },
-            linear: {
-                name: "线性梯度",
-                steps: [
-                    {time: 0, A: 95, B: 5},
-                    {time: 20, A: 5, B: 95},
-                    {time: 25, A: 5, B: 95},
-                    {time: 30, A: 95, B: 5}
-                ]
-            },
-            isocratic: {
-                name: "等度洗脱",
-                steps: [
-                    {time: 0, A: 80, B: 20},
-                    {time: 20, A: 80, B: 20}
-                ]
-            },
-            long: {
-                name: "长梯度",
-                steps: [
-                    {time: 0, A: 95, B: 5},
-                    {time: 30, A: 5, B: 95},
-                    {time: 35, A: 5, B: 95},
-                    {time: 40, A: 95, B: 5}
-                ]
-            },
-            shallow: {
-                name: "浅梯度",
-                steps: [
-                    {time: 0, A: 95, B: 5},
-                    {time: 30, A: 70, B: 30},
-                    {time: 35, A: 95, B: 5}
-                ]
-            },
-            step: {
-                name: "阶梯梯度",
-                steps: [
-                    {time: 0, A: 100, B: 0},
-                    {time: 5, A: 80, B: 20},
-                    {time: 10, A: 60, B: 40},
-                    {time: 15, A: 40, B: 60}
+                    {time: 0, A: 64, B: 36},
+                    {time: 25, A: 58, B: 42},
+                    {time: 40, A: 30, B: 70}
+                    {time: 45, A: 30, B: 70} 
+                    {time: 45.1, A: 64, B: 36}
+                    {time: 50, A: 64, B: 36}
                 ]
             }
         };
