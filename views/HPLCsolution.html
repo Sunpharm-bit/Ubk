@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>液相色谱流动相计算器</title>
+    <title>液相色谱流动相量计算</title>
     <style>
         * {
             box-sizing: border-box;
@@ -129,26 +129,28 @@
         }
         
         .preset-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            flex-direction: column;
             gap: 10px;
             margin-top: 10px;
         }
         
         .preset-btn {
-            background-color: #f1f3f4;
-            border: 1px solid #ddd;
+            background-color: #e8f0fe;
+            border: 2px solid #1a73e8;
             border-radius: 8px;
-            padding: 12px 10px;
-            font-size: 13px;
+            padding: 14px 15px;
+            font-size: 15px;
             cursor: pointer;
             transition: all 0.3s;
             text-align: center;
+            color: #1a73e8;
+            font-weight: 600;
         }
         
         .preset-btn:hover {
-            background-color: #e8f0fe;
-            border-color: #1a73e8;
+            background-color: #1a73e8;
+            color: white;
         }
         
         .preset-btn:active {
@@ -384,23 +386,23 @@
         
         /* 表格列宽设置 */
         .gradient-table th:nth-child(1), .gradient-table td:nth-child(1) {
-            width: 15%;
+            width: 12%;
         }
         
         .gradient-table th:nth-child(2), .gradient-table td:nth-child(2) {
-            width: 20%;
+            width: 18%;
         }
         
         .gradient-table th:nth-child(3), .gradient-table td:nth-child(3) {
-            width: 20%;
+            width: 17%;
         }
         
         .gradient-table th:nth-child(4), .gradient-table td:nth-child(4) {
-            width: 20%;
+            width: 17%;
         }
         
         .gradient-table th:nth-child(5), .gradient-table td:nth-child(5) {
-            width: 25%;
+            width: 20%;
         }
         
         .volumes-table th:nth-child(1), .volumes-table td:nth-child(1) {
@@ -447,10 +449,6 @@
                 font-size: 12px;
                 padding: 5px 3px;
             }
-            
-            .preset-buttons {
-                grid-template-columns: 1fr;
-            }
         }
         
         /* 平板和桌面 */
@@ -483,10 +481,6 @@
             
             .btn:last-child {
                 margin-right: 0;
-            }
-            
-            .preset-buttons {
-                grid-template-columns: repeat(3, 1fr);
             }
             
             .gradient-table th, .gradient-table td {
@@ -530,8 +524,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>液相色谱流动相计算器</h1>
-            <p class="subtitle">根据梯度程序、流速和针数计算流动相配置量</p>
+            <h1>液相色谱流动相量计算器</h1>
+            <p class="subtitle">根据梯度程序、流速和针数计算流动相配制量</p>
         </header>
         
         <div class="tab-container">
@@ -563,15 +557,14 @@
                 <select id="numPhases">
                     <option value="2">2相 (A, B)</option>
                     <option value="3">3相 (A, B, C)</option>
-                    <option value="4">4相 (A, B, C, D)</option>
                 </select>
             </div>
             
             <div class="preset-gradients">
                 <h2 class="section-title">常用梯度预设</h2>
-                <div class="note">选择预设梯度将自动填充下方表格（适用于2相系统）</div>
+                <div class="note">点击按钮将自动填充下方梯度表格</div>
                 <div class="preset-buttons">
-                    <button class="preset-btn" data-preset="quick">常用梯度<br>0-25-40-45-45.1-50 min</button>
+                    <button class="preset-btn" id="commonPreset">常用梯度</button>
                 </div>
             </div>
             
@@ -659,25 +652,23 @@
         </div>
         
         <div class="footer">
-            <p>液相色谱流动相计算器 &copy; 2023 实验室工具</p>
+            <p>液相色谱流动相使用量计算器 &copy; 2025 实验室工具</p>
             <p class="mobile-only" style="font-size: 11px; margin-top: 5px; opacity: 0.7;">专为移动端优化</p>
         </div>
     </div>
 
     <script>
-        // 预设梯度数据
-        const presetGradients = {
-            quick: {
-                name: "常用梯度",
-                steps: [
-                    {time: 0, A: 64, B: 36},
-                    {time: 25, A: 58, B: 42},
-                    {time: 40, A: 30, B: 70}
-                    {time: 45, A: 30, B: 70} 
-                    {time: 45.1, A: 64, B: 36}
-                    {time: 50, A: 64, B: 36}
-                ]
-            }
+        // 常用梯度数据
+        const commonGradient = {
+            name: "常用梯度",
+            steps: [
+                {time: 0, A: 64, B: 36},
+                {time: 25, A: 58, B: 42},
+                {time: 40, A: 30, B: 70},
+                {time: 45, A: 30, B: 70},
+                {time: 45.1, A: 64, B: 36},
+                {time: 50, A: 64, B: 36}
+            ]
         };
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -696,7 +687,7 @@
             const resultsContainer = document.getElementById('resultsContainer');
             const noResults = document.getElementById('noResults');
             const goToInputButton = document.getElementById('goToInput');
-            const presetButtons = document.querySelectorAll('.preset-btn');
+            const commonPresetButton = document.getElementById('commonPreset');
             
             // 初始化时隐藏结果
             resultsContainer.style.display = 'none';
@@ -732,31 +723,25 @@
                 inputTab.classList.add('active');
             });
             
-            // 预设梯度按钮事件
-            presetButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const presetId = this.getAttribute('data-preset');
-                    if (presetGradients[presetId]) {
-                        applyPresetGradient(presetId);
-                    }
-                });
+            // 常用梯度预设按钮事件
+            commonPresetButton.addEventListener('click', function() {
+                applyCommonGradient();
             });
             
-            // 应用预设梯度
-            function applyPresetGradient(presetId) {
-                const preset = presetGradients[presetId];
+            // 应用常用梯度
+            function applyCommonGradient() {
                 const numPhases = parseInt(numPhasesSelect.value);
                 
                 if (numPhases !== 2) {
-                    alert('预设梯度仅适用于2相系统，请先选择2相');
+                    alert('常用梯度仅适用于2相系统，请先选择2相');
                     return;
                 }
                 
                 // 清空现有梯度行
                 gradientBody.innerHTML = '';
                 
-                // 添加预设梯度步骤
-                preset.steps.forEach((step, index) => {
+                // 添加常用梯度步骤
+                commonGradient.steps.forEach((step, index) => {
                     const row = document.createElement('tr');
                     
                     // 步骤编号
@@ -808,7 +793,7 @@
                     gradientBody.appendChild(row);
                 });
                 
-                // 如果预设步骤少于6个，添加空行
+                // 如果常用梯度步骤少于6个，添加空行
                 const currentRows = gradientBody.querySelectorAll('tr').length;
                 for (let i = currentRows; i < 6; i++) {
                     addGradientRow();
@@ -818,7 +803,7 @@
                 updateStepNumbers();
                 
                 // 显示提示
-                alert(`已应用预设：${preset.name}`);
+                alert('已应用常用梯度 (50分钟梯度程序)');
             }
             
             // 添加梯度步骤行
