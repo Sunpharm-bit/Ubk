@@ -10,193 +10,449 @@
     <link rel="stylesheet" href="../statics/theme.css">
     <link rel="stylesheet" href="../statics/column.css">
     <style>
-        .searchbox {
-            width: 100%;
-            white-space: nowrap;
+        .search-section {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .search-type {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .type-btn {
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .type-btn.active {
+            border-color: #0078d4;
+            background-color: #e6f2ff;
+            color: #0078d4;
+            font-weight: bold;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
         }
 
         #keyword {
-            width: 80%;
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #keyword:focus {
+            outline: none;
+            border-color: #0078d4;
         }
 
         #search {
-            width: 15%;
+            padding: 10px 20px;
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #search:hover {
+            background-color: #005a9e;
+        }
+
+        #clear {
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #clear:hover {
+            background-color: #545b62;
+        }
+
+        .results-container {
+            margin-top: 20px;
+        }
+
+        .result-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #0078d4;
+            color: #333;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
         }
 
         .pure-table {
             width: 100%;
-            font-size: small;
+            font-size: 14px;
+            border-collapse: collapse;
+            margin-bottom: 20px;
         }
 
         .pure-table caption {
-            font-style: normal;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #333;
+        }
+
+        .pure-table th {
+            background-color: #f8f9fa;
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 2px solid #dee2e6;
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .pure-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #dee2e6;
+            vertical-align: top;
+        }
+
+        .pure-table tr:hover {
+            background-color: #f8f9fa;
         }
 
         .expir30 {
-            color: orange;
-
+            color: #ff9800;
+            font-weight: bold;
         }
 
         .expir7 {
-            color: red;
+            color: #f44336;
+            font-weight: bold;
         }
 
         .expired {
-            color: red;
+            color: #f44336;
+            text-decoration: line-through;
+            font-weight: bold;
+        }
+
+        .legend {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 3px;
+        }
+
+        .legend-expir30 {
+            background-color: #ff9800;
+        }
+
+        .legend-expir7 {
+            background-color: #f44336;
+        }
+
+        .legend-expired {
+            background-color: #f44336;
             text-decoration: line-through;
         }
     </style>
     <script src="../statics/modules/jquery.min.js"></script>
     <script>
-        // 可用于查询的数据
+        // 数据库配置
         const databases = [
             {
                 "name": "device",
-                "path": "../statics/info/device.json"
+                "display": "设备信息",
+                "path": "../statics/info/device.json",
+                "columns": ["名称", "编号", "有效期至"]
             },
             {
                 "name": "standard",
-                "path": "../statics/info/standard.json"
+                "display": "对照品信息",
+                "path": "../statics/info/standard.json",
+                "columns": ["名称", "批号", "有效期至", "来源"]
             }
-        ]
+        ];
 
-        let info = {}
+        let info = {
+            device: [],
+            standard: []
+        };
+        
+        let currentSearchType = 'both'; // both, device, standard
+
         $(() => {
-            let count = databases.length
-            let interval = setInterval(() => {
-                if (count == 0) {
-                    $("#content").append("已加载所有数据")
-                    clearInterval(interval)
+            // 初始化加载数据
+            loadAllData();
+            
+            // 搜索按钮事件
+            $("#search").click(() => {
+                performSearch();
+            });
+            
+            // 回车键搜索
+            $("#keyword").keypress((e) => {
+                if (e.which === 13) {
+                    performSearch();
                 }
-            }, 100)
+            });
+            
+            // 清除按钮事件
+            $("#clear").click(() => {
+                $("#keyword").val('');
+                $("#content").empty();
+                $("#content").append('<div class="no-data">请输入查询关键字开始搜索</div>');
+            });
+            
+            // 查询类型切换
+            $(".type-btn").click(function() {
+                $(".type-btn").removeClass("active");
+                $(this).addClass("active");
+                currentSearchType = $(this).data("type");
+            });
+        });
 
-            // 加载所有数据
-            for (const database of databases) {
-                $.getJSON(database.path, (data) => {
-                    info[database.name] = data
-                    count = --count
-                    switch (database.name) {
-                        case "device":
-                            $("#content").append(`已加载设备数据，共 ${data.length} 条<br>`)
-                            break
-                        case "standard":
-                            $("#content").append(`已加载对照品数据，共 ${data.length} 条<br>`)
-                            break
-                        default:
-                            break
-                    }
-                })
+        function loadAllData() {
+            let loadingText = "正在加载数据...<br>";
+            $("#content").html(loadingText);
+            
+            let promises = databases.map(db => {
+                return $.getJSON(db.path)
+                    .then(data => {
+                        info[db.name] = data;
+                        return `${db.display}数据加载完成，共 ${data.length} 条记录<br>`;
+                    })
+                    .catch(error => {
+                        console.error(`加载${db.display}数据失败:`, error);
+                        return `${db.display}数据加载失败<br>`;
+                    });
+            });
+
+            Promise.all(promises)
+                .then(results => {
+                    $("#content").html(results.join(''));
+                    setTimeout(() => {
+                        $("#content").append('<div class="no-data">请输入查询关键字开始搜索</div>');
+                    }, 1000);
+                });
+        }
+
+        function performSearch() {
+            let keyword = $("#keyword").val().trim().toLowerCase();
+            if (!keyword) {
+                alert("请输入查询关键字");
+                return;
             }
 
-            $("#search").click(() => {
-                let keyword = $("#keyword").val().toLowerCase()
-                $("#content").empty()
-                searchDevice(keyword)
-                searchStandard(keyword)
-            })
-        })
+            $("#content").empty();
+
+            if (currentSearchType === 'device' || currentSearchType === 'both') {
+                searchDevice(keyword);
+            }
+            
+            if (currentSearchType === 'standard' || currentSearchType === 'both') {
+                searchStandard(keyword);
+            }
+
+            // 如果什么都没找到
+            if ($("#content").children().length === 0) {
+                $("#content").append('<div class="no-data">未找到相关记录</div>');
+            }
+        }
 
         function searchDevice(keyword) {
-            let device = info.device.filter((value) => {
-                return value.id.toLowerCase().includes(keyword)
-            })
-            if (device.length > 0) {
-                let table_device = createDeviceTable(device)
-                $("#content").append(table_device)
+            let results = info.device.filter(item => {
+                return item.id.toLowerCase().includes(keyword) || 
+                       (item.name && item.name.toLowerCase().includes(keyword));
+            });
+            
+            if (results.length > 0) {
+                let section = $('<div class="result-section"></div>');
+                section.append(`<div class="section-title">设备信息（共 ${results.length} 条）</div>`);
+                section.append(createDeviceTable(results));
+                $("#content").append(section);
             }
         }
 
         function searchStandard(keyword) {
-            let standard = info.standard.filter((value) => {
-                return value.batch.toLowerCase().includes(keyword)
-            })
-            if (standard.length > 0) {
-                let table_standard = createStandardTable(standard)
-                $("#content").append(table_standard)
+            let results = info.standard.filter(item => {
+                return item.batch.toLowerCase().includes(keyword) || 
+                       (item.name && item.name.toLowerCase().includes(keyword)) ||
+                       (item.source && item.source.toLowerCase().includes(keyword));
+            });
+            
+            if (results.length > 0) {
+                let section = $('<div class="result-section"></div>');
+                section.append(`<div class="section-title">对照品信息（共 ${results.length} 条）</div>`);
+                section.append(createStandardTable(results));
+                $("#content").append(section);
             }
         }
 
         function createDeviceTable(data) {
-            return createTable(data, `设备信息（${data.length}条）`, ["名称", "编号", "有效期至"], ["where"])
+            let table = $('<table class="pure-table"></table>');
+            let thead = $('<thead></thead>');
+            let headerRow = $('<tr></tr>');
+            
+            databases[0].columns.forEach(col => {
+                headerRow.append(`<th>${col}</th>`);
+            });
+            
+            thead.append(headerRow);
+            table.append(thead);
+            
+            let tbody = $('<tbody></tbody>');
+            
+            data.forEach(item => {
+                let row = $('<tr></tr>');
+                // 名称
+                row.append(`<td>${item.name || ''}</td>`);
+                // 编号
+                row.append(`<td>${item.id || ''}</td>`);
+                // 有效期至
+                let expirCell = $('<td></td>');
+                expirCell.html(checkExpir(item.expir || ''));
+                row.append(expirCell);
+                
+                tbody.append(row);
+            });
+            
+            table.append(tbody);
+            return table;
         }
 
         function createStandardTable(data) {
-            return createTable(data, `对照品信息（${data.length}条）`, ["名称", "批号", "来源", "有效期至"], ["kind"])
-        }
-
-        function createTable(data, captionText, header, hidden = []) {
-            let table = document.createElement("table")
-            table.setAttribute("class", "pure-table")
-
-            let caption = document.createElement("caption")
-            caption.innerText = captionText
-            table.appendChild(caption)
-
-            let tr = document.createElement("tr")
-            for (const headerText of header) {
-                let th = document.createElement("th")
-                th.innerText = headerText
-                tr.appendChild(th)
-            }
-            table.appendChild(tr)
-
-            data.forEach(element => {
-                let tr = document.createElement("tr")
-                for (const key in element) {
-                    if (Object.hasOwnProperty.call(element, key)) {
-                        if (hidden.includes(key)) {
-                            continue
-                        }
-                        const value = element[key]
-                        let td = document.createElement("td")
-                        td.innerHTML = (key == "expir") ? checkExpir(value) : value
-                        tr.appendChild(td)
-                    }
-                }
-                table.appendChild(tr)
-            })
-
-            return table
+            let table = $('<table class="pure-table"></table>');
+            let thead = $('<thead></thead>');
+            let headerRow = $('<tr></tr>');
+            
+            databases[1].columns.forEach(col => {
+                headerRow.append(`<th>${col}</th>`);
+            });
+            
+            thead.append(headerRow);
+            table.append(thead);
+            
+            let tbody = $('<tbody></tbody>');
+            
+            data.forEach(item => {
+                let row = $('<tr></tr>');
+                // 名称
+                row.append(`<td>${item.name || ''}</td>`);
+                // 批号
+                row.append(`<td>${item.batch || ''}</td>`);
+                // 有效期至
+                let expirCell = $('<td></td>');
+                expirCell.html(checkExpir(item.expir || ''));
+                row.append(expirCell);
+                // 来源
+                row.append(`<td>${item.source || ''}</td>`);
+                
+                tbody.append(row);
+            });
+            
+            table.append(tbody);
+            return table;
         }
 
         function checkExpir(value) {
-            let date = new Date()
-            let array = value.split(".")
-            date.setFullYear(array[0], array[1] - 1, array[2])
+            if (!value) return '';
+            
+            let date = new Date();
+            let array = value.split(".");
+            date.setFullYear(array[0], array[1] - 1, array[2]);
 
-            let day = (date - Date.now()) / 86400000
+            let day = (date - Date.now()) / 86400000;
 
             if (day <= 0) {
-                return `<span class='expired'>${value}</span>`
+                return `<span class='expired'>${value}</span>`;
             }
 
             if (day <= 7) {
-                return `<span class='expir7'>${value}</span>`
+                return `<span class='expir7'>${value}</span>`;
             }
 
             if (day <= 30) {
-                return `<span class='expir30'>${value}</span>`
+                return `<span class='expir30'>${value}</span>`;
             }
 
-            return value
+            return value;
         }
     </script>
 </head>
 
 <body>
-    <div class="searchbox">
-        <input type="text" name="keyword" id="keyword" placeholder="输入查询关键字（忽略大小写）">
-        <button type="submit" id="search">搜索</button>
+    <div class="search-section">
+        <div class="search-type">
+            <button class="type-btn active" data-type="both">全部查询</button>
+            <button class="type-btn" data-type="device">设备信息</button>
+            <button class="type-btn" data-type="standard">对照品信息</button>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" name="keyword" id="keyword" 
+                   placeholder="请输入设备编号、名称或对照品批号、名称进行查询">
+            <button type="submit" id="search">搜索</button>
+            <button type="button" id="clear">清除</button>
+        </div>
     </div>
 
     <div id="content"></div>
-    <div>
-        <p>
-            过期提醒：<br>
-            <span class="expir30">黄色表示有效期剩余 30 天</span><br>
-            <span class="expir7">红色表示有效期剩余 7 天</span><br>
-            <span class="expired">红色加删除线表示已过期</span><br>
-        </p>
+    
+    <div class="legend">
+        <div class="section-title">过期提醒说明</div>
+        <div class="legend-item">
+            <div class="legend-color legend-expir30"></div>
+            <span>黄色表示有效期剩余 30 天以内</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color legend-expir7"></div>
+            <span>红色表示有效期剩余 7 天以内</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color legend-expired"></div>
+            <span>红色加删除线表示已过期</span>
+        </div>
     </div>
 </body>
 
