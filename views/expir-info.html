@@ -771,11 +771,11 @@
             
             results.forEach(item => {
                 let row = $('<tr></tr>');
-                // 名称
+                //       名称
                 row.append(`<td>${item.name || '—'}</td>`);
-                // 编号
+                //       编号
                 row.append(`<td>${item.id || '—'}</td>`);
-                // 有效期至
+                //      有效期至
                 let expirCell = $('<td></td>');
                 expirCell.html(checkExpir(item.expir || ''));
                 row.append(expirCell);
@@ -815,15 +815,15 @@
             
             results.forEach(item => {
                 let row = $('<tr></tr>');
-                // 名称
+                //      名称
                 row.append(`<td>${item.kind || '—'}</td>`);
-                // 批号
+                //      批号
                 row.append(`<td>${item.batch || '—'}</td>`);
-                // 有效期至
+                //     有效期至
                 let expirCell = $('<td></td>');
                 expirCell.html(checkExpir(item.expir || ''));
                 row.append(expirCell);
-                // 来源
+                //       来源
                 row.append(`<td>${item.source || '—'}</td>`);
                 
                 tbody.append(row);
