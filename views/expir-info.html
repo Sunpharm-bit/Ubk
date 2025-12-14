@@ -816,7 +816,7 @@
             results.forEach(item => {
                 let row = $('<tr></tr>');
                 // 名称
-                row.append(`<td>${item.name || '—'}</td>`);
+                row.append(`<td>${item.kind || '—'}</td>`);
                 // 批号
                 row.append(`<td>${item.batch || '—'}</td>`);
                 // 有效期至
